@@ -10,5 +10,7 @@
     <string name="bus_id">버스 상세정보</string>
     <string name="bus_location">버스 위치</string>
     <string name="title_search">버스 검색</string>
+    <string name="bus_location_info">번 버스 위치 정보입니다</string>
+
 
 </resources>
