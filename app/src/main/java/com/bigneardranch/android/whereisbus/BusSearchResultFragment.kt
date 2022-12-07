@@ -9,10 +9,6 @@ import android.view.ViewGroup
 
 class BusSearchResult : Fragment() {
 
-    companion object {
-        fun newInstance() = BusSearchResult()
-    }
-
     private lateinit var viewModel: BusSearchResultViewModel
 
     override fun onCreateView(
@@ -25,7 +21,6 @@ class BusSearchResult : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(BusSearchResultViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }

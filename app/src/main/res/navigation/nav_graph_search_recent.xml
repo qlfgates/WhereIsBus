@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_search_recent"
+    app:startDestination="@id/busSearch">
+
+    <fragment
+        android:id="@+id/busSearch"
+        android:name="com.bigneardranch.android.whereisbus.BusSearch"
+        android:label="BusSearch" >
+        <action
+            android:id="@+id/action_busSearch_to_busLocationFragment"
+            app:destination="@id/busLocationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/busLocationFragment"
+        android:name="com.bigneardranch.android.whereisbus.BusLocationFragment"
+        android:label="BusLocationFragment" />
+</navigation>

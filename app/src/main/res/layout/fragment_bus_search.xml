@@ -20,8 +20,7 @@
             android:padding="10dp"
             android:layout_marginRight="10dp"
             android:layout_gravity="center_vertical"
-            android:text="@string/bus_number"
-            android:textColorHint="@color/material_dynamic_neutral0">
+            android:hint="@string/bus_number">
 
         </EditText>
 
