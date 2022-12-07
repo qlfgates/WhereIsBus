@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:padding="10dp"
         android:gravity="bottom">
 
         <EditText
@@ -17,8 +18,9 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:layout_gravity="bottom"
-            android:text="버스 번호">
+            android:layout_gravity="center_vertical"
+            android:text="버스 번호"
+            android:textColorHint="@color/material_dynamic_neutral0">
 
         </EditText>
 
@@ -30,60 +32,52 @@
             android:text="search">
         </Button>
 
-
             <TextView
                 android:id="@+id/information_input"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
                 android:gravity="bottom"
-                android:text="버스 위치를 검색하시려면 왼쪽칸에 버스번호를 입력하세요">
+                android:text="버스 위치를 검색하시려면 버스번호를 입력하세요">
             </TextView>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="버스 위치"
-            android:layout_weight="@integer/material_motion_duration_medium_1">
+            android:textColor="@color/black">
         </TextView>
 
         <TextView
             android:id="@+id/bus_number"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:text="버스 번호"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:paddingLeft="120dp"
+            android:gravity="right">
         </TextView>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="2dp"
+        android:layout_marginHorizontal="20dp"
         android:background="@color/black">
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/recent_searched_bus_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="최근 검색 버스">
-        </TextView>
-
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/busnumber"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
