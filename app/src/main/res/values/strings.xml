@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">WhereIsBus</string>
-    <string name="bus_number">버스 번호</string>
+    <string name="route_id">버스 번호</string>
     <string name="search">검색</string>
     <string name="search_info">버스 위치를 검색하려면 버스번호를 입력하세요</string>
     <string name="search_result">버스 검색 결과</string>
     <string name="search_result_noti">번 버스 검색결과 입니다</string>
     <string name="search_recent_list">최근 검색 버스</string>
     <string name="test_space">abcdefghijklmnop</string>
-    <string name="bus_id">버스 상세정보</string>
+    <string name="veh_id">버스 상세정보</string>
     <string name="bus_location">버스 위치</string>
     <string name="title_search">버스 검색</string>
     <string name="bus_location_info">번 버스 위치 정보입니다</string>

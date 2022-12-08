@@ -20,7 +20,7 @@
             android:padding="10dp"
             android:layout_marginRight="10dp"
             android:layout_gravity="center_vertical"
-            android:hint="@string/bus_number">
+            android:hint="@string/veh_id">
 
         </EditText>
 
@@ -57,7 +57,7 @@
         </TextView>
 
         <TextView
-            android:id="@+id/bus_number"
+            android:id="@+id/route_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/test_space"
@@ -97,11 +97,15 @@
         android:paddingHorizontal="20dp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:scrollbarAlwaysDrawHorizontalTrack="true"
             android:id="@+id/recyclerView"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:overScrollMode="always"
+            app:layout_constraintHorizontal_weight="1"
+            android:scrollbarAlwaysDrawHorizontalTrack="true"
             android:layout_width="411dp"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:padding="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">

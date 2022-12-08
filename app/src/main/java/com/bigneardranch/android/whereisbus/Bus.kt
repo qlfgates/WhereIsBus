@@ -12,6 +12,6 @@ data class Bus(
     val vehId: String,
     //차량번호
     val plainNo: String,
-    //노선ID
+    //노선ID:버스노선(2412 등)
     val routeId: String,
 )
