@@ -13,3 +13,7 @@ zH5Ha+qqrVSIOJ8Sq9nKTBxPEwVzbrapRS2OEzmyEcDi0y6EtEjOrrWMRHfOmOkyhXp8Jb9zMeGgpT8Y
 
 서울특별시_교통정보과_API정보
 http://api.bus.go.kr/contents/sub02/svcList.html
+
+
+http://ws.bus.go.kr/api/rest/buspos/getBusPosByRtid?ServiceKey=인증키&busRouteId=100100118
+

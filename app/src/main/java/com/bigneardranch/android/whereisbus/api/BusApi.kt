@@ -1,4 +1,9 @@
 package com.bigneardranch.android.whereisbus.api
 
-class BusApi {
+import retrofit2.http.GET
+
+interface BusApi {
+
+    @GET("/")
+    suspend fun fetchContents(): String
 }
