@@ -1,6 +1,9 @@
 package com.bigneardranch.android.whereisbus
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity
 data class Bus(
     //구간순번
     val selectOrd: String,
@@ -11,7 +14,7 @@ data class Bus(
     //버스ID
     val vehId: String,
     //차량번호
-    val plainNo: String,
+    @PrimaryKey val plainNo: String,
     //노선ID:버스노선(2412 등)
     val routeId: String,
 )

@@ -1,6 +1,7 @@
 package com.bigneardranch.android.whereisbus
 
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.delay
 
 private const val TAG = "BusSearchResultViewModel"
 
@@ -12,7 +13,8 @@ class BusSearchResultViewModel : ViewModel() {
 
     init {
         for (i in 0 until 10){
-            val bus = Bus(selectOrd = "101010",
+            val bus = Bus(
+                selectOrd = "101010",
                 stopFlag = "1",
                 selectId = "111",
                 vehId = "1024",
@@ -20,5 +22,23 @@ class BusSearchResultViewModel : ViewModel() {
                 routeId = "1212")
             buses += bus
         }
+    }
+
+    suspend fun loadBuses() : List<Bus> {
+        val result = mutableListOf<Bus>()
+        delay(5000)
+
+        for(i in 0 until 100){
+            val bus = Bus(
+                selectOrd = "",
+                stopFlag = "" ,
+                selectId = "",
+                vehId = "",
+                plainNo = "",
+                routeId = ""
+            )
+            buses += bus
+        }
+        return result
     }
 }
