@@ -2,10 +2,10 @@ package com.bigneardranch.android.whereisbus
 
 import android.app.Application
 
-class BusSearchApplication : Application() {
+class BusSearchResultApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        BusRepository.initialize(this)
+        BusSearchResultRepository.initialize(this)
     }
 }

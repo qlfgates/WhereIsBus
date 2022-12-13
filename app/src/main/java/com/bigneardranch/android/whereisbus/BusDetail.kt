@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
-import com.bigneardranch.android.whereisbus.databinding.FragmentBusLocationBinding
+import com.bigneardranch.android.whereisbus.data.Bus
 import com.bigneardranch.android.whereisbus.databinding.FragmentBusSearchBinding
 
 
@@ -17,12 +17,6 @@ class BusDetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bus = Bus(selectOrd = "101010",
-        stopFlag = "1",
-        selectId = "111",
-        vehId = "1024",
-        plainNo = "46구4566",
-        routeId = "1212")
     }
 
     override fun onCreateView(

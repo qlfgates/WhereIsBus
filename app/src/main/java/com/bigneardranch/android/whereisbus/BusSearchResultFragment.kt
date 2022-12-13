@@ -1,13 +1,16 @@
 package com.bigneardranch.android.whereisbus
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.*
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bigneardranch.android.whereisbus.api.BusApi
 import com.bigneardranch.android.whereisbus.databinding.FragmentBusSearchResultBinding
 import kotlinx.coroutines.Job
@@ -17,21 +20,15 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.create
 
 // 검색 결과 화면
-private const val TAG = "BusSearchResult"
+private const val TAG = "BUS_SEARCH_RESULT_FRAGMENT"
 
 class BusSearchResultFragment : Fragment() {
 
-    private var _binding: FragmentBusSearchResultBinding ?= null
+    private var _binding: FragmentBusSearchResultBinding? = null
     private val binding
-        get() = checkNotNull(_binding){ "cannot" }
+        get() = checkNotNull(_binding){ "Cannot access binding because it is null"}
 
-    private val busResultListViewModel: BusSearchResultViewModel by viewModels()
-
-    private var job: Job? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private val busSearchResultViewModel: BusSearchResultViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,43 +36,24 @@ class BusSearchResultFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentBusSearchResultBinding.inflate(inflater, container, false)
-        binding.busSearchResultListRecyclerView.layoutManager = LinearLayoutManager(context)
-
-        val buses = busResultListViewModel.buses
-        val adapter = BusListAdapter(buses)
-        binding.busSearchResultListRecyclerView.adapter = adapter
+        binding.busSearchResultListRecyclerView.layoutManager = GridLayoutManager(context, 3)
         return binding.root
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        job = viewLifecycleOwner.lifecycleScope.launch{
-            val buses = busResultListViewModel.loadBuses()
-            binding.busSearchResultListRecyclerView.adapter = BusListAdapter(buses)
-        }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        job?.cancel()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //api
-        val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("http://ws.bus.go.kr/api/rest/buspost")
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .build()
-        val busApi: BusApi = retrofit.create<BusApi>()
-
         viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                val response = BusSearchResultRepository().fetchBuses()
+                Log.d(TAG, "Response received: $response")
+            } catch (ex: Exception){
+                Log.e(TAG, "Failed to fetch buses", ex)
+            }
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                val busResponse = busApi.fetchContents()
-                val buses = busResultListViewModel.loadBuses()
-                binding.busSearchResultListRecyclerView.adapter = BusListAdapter(buses)
+                busSearchResultViewModel.busItems.collect{ buses ->
+                    Log.d(TAG, "Response received: $buses")
+                }
             }
         }
     }
@@ -84,5 +62,4 @@ class BusSearchResultFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }

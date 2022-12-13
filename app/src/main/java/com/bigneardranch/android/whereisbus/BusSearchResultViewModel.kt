@@ -1,44 +1,33 @@
 package com.bigneardranch.android.whereisbus
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.bigneardranch.android.whereisbus.data.Bus
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 
 private const val TAG = "BusSearchResultViewModel"
 
-// 찾은 결과
-
 class BusSearchResultViewModel : ViewModel() {
 
-    val buses = mutableListOf<Bus>()
+    private val busSearchResultRepository = BusSearchResultRepository()
+
+    private val _busItems: MutableStateFlow<List<Bus>> = MutableStateFlow(emptyList())
+    val busItems: StateFlow<List<Bus>>
+        get() = _busItems.asStateFlow()
 
     init {
-        for (i in 0 until 10){
-            val bus = Bus(
-                selectOrd = "101010",
-                stopFlag = "1",
-                selectId = "111",
-                vehId = "1024",
-                plainNo = "46구4566",
-                routeId = "1212")
-            buses += bus
+        viewModelScope.launch {
+            try {
+                val buses = busSearchResultRepository.fetchBuses()
+                Log.d(TAG, "Buses received: $buses")
+            } catch (ex: Exception){
+                Log.e(TAG, "Failed to fetch bus items", ex)
+            }
         }
-    }
-
-    suspend fun loadBuses() : List<Bus> {
-        val result = mutableListOf<Bus>()
-        delay(5000)
-
-        for(i in 0 until 100){
-            val bus = Bus(
-                selectOrd = "",
-                stopFlag = "" ,
-                selectId = "",
-                vehId = "",
-                plainNo = "",
-                routeId = ""
-            )
-            buses += bus
-        }
-        return result
     }
 }
