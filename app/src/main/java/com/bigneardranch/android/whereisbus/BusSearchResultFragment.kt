@@ -30,6 +30,8 @@ class BusSearchResultFragment : Fragment() {
 
     private val busSearchResultViewModel: BusSearchResultViewModel by viewModels()
 
+    private var job: Job? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,7 +39,20 @@ class BusSearchResultFragment : Fragment() {
     ): View? {
         _binding = FragmentBusSearchResultBinding.inflate(inflater, container, false)
         binding.busSearchResultListRecyclerView.layoutManager = GridLayoutManager(context, 3)
+
+        val buses = busSearchResultViewModel.busItems
+        val adapter = BusSearchResultListAdapter(buses)
+        binding.busSearchResultListRecyclerView.adapter = adapter
+
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        job = viewLifecycleOwner.lifecycleScope.launch {
+            val buses = busSearchResultViewModel.loadBuses()
+            binding.busSearchResultListRecyclerView.adapter = BusSearchResultListAdapter(buses)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,5 +76,6 @@ class BusSearchResultFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        job?.cancel()
     }
 }

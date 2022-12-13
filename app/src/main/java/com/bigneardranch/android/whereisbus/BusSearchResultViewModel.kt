@@ -30,4 +30,9 @@ class BusSearchResultViewModel : ViewModel() {
             }
         }
     }
+
+    suspend fun loadBuses(): List<Bus>{
+        val buses = mutableListOf<Bus>()
+        return buses
+    }
 }
