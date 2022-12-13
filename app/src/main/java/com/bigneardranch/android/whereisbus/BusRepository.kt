@@ -7,7 +7,7 @@ import com.bigneardranch.android.whereisbus.database.BusDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 
-private const val DATABASE_NAME = "bus-database"
+private const val DATABASE_NAME = "bus-database-routeid"
 
 class BusRepository private constructor(context: Context, private val coroutineScope: CoroutineScope = GlobalScope) {
 
