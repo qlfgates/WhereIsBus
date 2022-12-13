@@ -1,5 +1,7 @@
 package com.bigneardranch.android.whereisbus.data
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import java.util.Date
@@ -9,6 +11,7 @@ import java.util.Date
 private const val TAG = "BUS_INFO"
 
 @JsonClass(generateAdapter = true)
+@Entity
 data class Bus(
 
     //노선ID:버스노선(2412 등) : 요청메시지에 포함
@@ -41,6 +44,7 @@ data class Bus(
     val vehId: String,
     //차량번호
     @Json(name = "plainNo")
+    @PrimaryKey
     val plainNo: String
 
 //    val busType: Int,

@@ -4,7 +4,7 @@
     package="com.bigneardranch.android.whereisbus">
 
     <application
-        android:name=".BusSearchResultApplication"
+        android:name=".BusSearchApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"

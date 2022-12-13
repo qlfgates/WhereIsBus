@@ -10,7 +10,7 @@ interface BusApi {
     @GET("/")
     suspend fun fetchContents(): BusResponse
 
-    @GET("getBusPosByRtid?" + "ServiceKey=$API_KEY" + "&busRouteId=100100118")
+    @GET("getBusPosByRtid?" + "ServiceKey=$API_KEY" + "&busRouteId=100100118" + "resultType=json")
     suspend fun fetchBus(): BusResponse
 
 }

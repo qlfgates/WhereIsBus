@@ -5,12 +5,12 @@ import androidx.room.Query
 import com.bigneardranch.android.whereisbus.data.Bus
 
 @Dao
-interface BusDAO {
+interface BusDao {
 
-    @Query("SELECT * FROM bus")
+    @Query("SELECT * FROM Bus")
     suspend fun getBuses(): List<Bus>
 
-    @Query("SELECT * FROM bus WHERE routeId")
-    suspend fun getBusesRouteId(): List<Bus>
+    @Query("SELECT * FROM bus WHERE routeId=(:routeId)")
+    suspend fun getBusesRouteId(routeId: String): List<Bus>
 
 }

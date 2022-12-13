@@ -17,7 +17,7 @@
         android:text="Bus Number"
         android:textAppearance="?attr/textAppearanceHeadline6"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/bus_id"
+        app:layout_constraintEnd_toStartOf="@+id/bus_stop_icon"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
