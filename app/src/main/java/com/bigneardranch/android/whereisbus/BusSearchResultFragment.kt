@@ -13,6 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bigneardranch.android.whereisbus.data.Bus
 import com.bigneardranch.android.whereisbus.databinding.FragmentBusSearchResultBinding
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -44,40 +45,19 @@ class BusSearchResultFragment : Fragment() {
     ): View? {
         _binding = FragmentBusSearchResultBinding.inflate(inflater, container, false)
         binding.busSearchResultListRecyclerView.layoutManager = LinearLayoutManager(context)
-//
-//        val buses = busSearchResultViewModel.busItems
-//        val adapter = BusSearchResultListAdapter(buses)
-//        binding.busSearchResultListRecyclerView.adapter = adapter
 
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-//        job = viewLifecycleOwner.lifecycleScope.launch {
-//            val buses = busSearchResultViewModel.loadBuses()
-//            binding.busSearchResultListRecyclerView.adapter = BusSearchResultListAdapter(buses)
-//        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewLifecycleOwner.lifecycleScope.launch {
-            try {
-                val response = BusSearchResultRepository().fetchBuses()
-                Log.d(TAG, "Response received: $response")
-            } catch (ex: Exception){
-                Log.e(TAG, "Failed to fetch buses", ex)
-            }
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                busSearchResultViewModel.busItems.collect{ buses ->
-                    Log.d(TAG, "Response received: $buses")
-//                    binding.busSearchResultListRecyclerView.adapter =
-//                        BusSearchResultListAdapter(buses){ busId ->
-//                            findNavController().navigate()
-//                            )
-//                        }
+                busSearchResultViewModel.busItems.collect{ busItems ->
+                    binding.busSearchResultListRecyclerView.adapter = BusSearchResultListAdapter(busItems)
+
                 }
             }
         }

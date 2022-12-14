@@ -8,7 +8,9 @@ import kotlinx.coroutines.flow.Flow
 interface RouteDao {
 
     @Query("SELECT * FROM Route")
+//    fun getBusIdS(): List<Route>
     fun getBusIdS(): Flow<List<Route>>
+
 
     @Query("SELECT * FROM Route WHERE busNumber=(:busNumber)")
     suspend fun getBusId(busNumber: String): Route

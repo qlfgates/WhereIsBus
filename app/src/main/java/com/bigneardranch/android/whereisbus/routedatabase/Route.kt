@@ -5,6 +5,6 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Route(
-    val busNumber: String,
-    @PrimaryKey val busId: String
+    @PrimaryKey val busId: String,
+    val busNumber: String
 )
