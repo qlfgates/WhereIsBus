@@ -11,7 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
 
-private const val DATABASE_NAME = "Route.sqlite"
+private const val DATABASE_NAME = "route-db.db"
 
 class BusRepository private constructor(context: Context, private val coroutineScope: CoroutineScope = GlobalScope) {
 
