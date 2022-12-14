@@ -7,17 +7,19 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bigneardranch.android.whereisbus.data.Bus
 import com.bigneardranch.android.whereisbus.databinding.ListBusDetailBinding
+import com.bigneardranch.android.whereisbus.routedatabase.Route
 
 
-class BusResultViewHolder(val binding: ListBusDetailBinding) : RecyclerView.ViewHolder(binding.root){
-    fun bind(bus: Bus){
-        binding.routeId.text = bus.routeId
-        binding.vehId.text = bus.vehId
+class BusViewHolder(val binding: ListBusDetailBinding) : RecyclerView.ViewHolder(binding.root){
+    fun bind(route: Route, onRouteClicked: (busId: String) -> Unit){
+        binding.routeId.text = route.busNumber
+        binding.vehId.text = route.busId
 
         binding.root.setOnClickListener {
-            Toast.makeText(binding.root.context, "${bus.routeId} clicked", Toast.LENGTH_SHORT).show()
+            Toast.makeText(binding.root.context, "${route.busNumber} clicked", Toast.LENGTH_SHORT).show()
+            onRouteClicked(route.busId)
         }
-        binding.busStopIcon.visibility = if(bus.stopFlag!=null){
+        binding.busStopIcon.visibility = if(route.busNumber!=null){
             View.VISIBLE
         } else {
             View.GONE
@@ -25,21 +27,25 @@ class BusResultViewHolder(val binding: ListBusDetailBinding) : RecyclerView.View
     }
 }
 
-class BusListAdapter(private val buses: List<Bus>) : RecyclerView.Adapter<BusResultViewHolder>(){
+class BusListAdapter(
+    private val routes: List<Route>,
+    private val onRouteClicked: (busId: String) -> Unit)
+    : RecyclerView.Adapter<BusViewHolder>(){
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BusResultViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BusViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ListBusDetailBinding.inflate(inflater, parent, false)
-        return BusResultViewHolder(binding)
+        return BusViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: BusResultViewHolder, position: Int) {
-        val bus = buses[position]
-        holder.apply {
-            binding.vehId.text = bus.routeId
-            binding.routeId.text = bus.vehId
-        }
+    override fun onBindViewHolder(holder: BusViewHolder, position: Int) {
+        val route = routes[position]
+        holder.bind(route, onRouteClicked)
+//        holder.apply {
+//            binding.vehId.text = route.busNumber
+//            binding.routeId.text = route.busId
+//        }
     }
 
-    override fun getItemCount() = buses.size
+    override fun getItemCount() = routes.size
 }

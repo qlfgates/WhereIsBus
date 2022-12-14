@@ -98,7 +98,7 @@
         android:paddingHorizontal="20dp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/recent_recyclerView"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             android:overScrollMode="always"

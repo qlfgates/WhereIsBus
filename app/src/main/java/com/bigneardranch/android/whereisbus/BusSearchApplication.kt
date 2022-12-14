@@ -12,7 +12,5 @@ class BusSearchApplication : Application() {
 //        val reader = CSVReader(InputStreamReader(inputStream))
 
         BusRepository.initialize(this)
-
-
     }
 }

@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bigneardranch.android.whereisbus.databinding.FragmentBusSearchBinding
@@ -43,7 +44,7 @@ class BusSearchFragment : Fragment() {
     ): View? {
 
         _binding = FragmentBusSearchBinding.inflate(inflater, container, false)
-        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        binding.recentRecyclerView.layoutManager = LinearLayoutManager(context)
 
         return binding.root
     }
@@ -51,15 +52,19 @@ class BusSearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.i(":::::", "onViewCreated")
-        busListViewModel.init()
+
         viewLifecycleOwner.lifecycleScope.launch{
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-//                val buses = busListViewModel.loadBuses()
-//                busListViewModel.buses.collect{ buses ->
-//                    binding.busRecyclerView
-//                }
+                busListViewModel.routes.collect{ routes ->
+                    binding.recentRecyclerView.adapter =
+                        BusListAdapter(routes) { routeId ->
+                            findNavController().navigate(
+                                BusSearchFragmentDirections.actionBusSearchToBusSearchResult()
+                            )
+                        }
+                }
             }
         }
+
     }
 }
