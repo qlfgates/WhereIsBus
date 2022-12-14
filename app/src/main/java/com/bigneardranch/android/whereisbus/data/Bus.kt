@@ -1,5 +1,6 @@
 package com.bigneardranch.android.whereisbus.data
 
+import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
@@ -15,7 +16,7 @@ private const val TAG = "BUS_INFO"
 data class Bus(
 
     //노선ID:버스노선(2412 등) : 요청메시지에 포함
-    val routeId: String,
+    val routeId: String? = null,
 
 //    val ServiceResult: String,
 //    val comMsgHeader: String,
@@ -27,21 +28,21 @@ data class Bus(
 //    val itemList: String,
 
     //구간순번
-    val sectOrd: String,
+    val sectOrd: String? = null,
 //    val fullSectDist: Float,
 //    val sectDist: Float,
 //    val rtDist: Float,
 
     //정류소도착여부
-    val stopFlag: String,
+    val stopFlag: String? = null,
     //구간Id
-    val sectionId: String,
+    val sectionId: String? = null,
 //    val dataTm: Date,
 //    val gpsX: Float,
 //    val gpsY: Float,
 
     //버스ID
-    val vehId: String,
+    val vehId: String? = null,
     //차량번호
     @Json(name = "plainNo")
     @PrimaryKey

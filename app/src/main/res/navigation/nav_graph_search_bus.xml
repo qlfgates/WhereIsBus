@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/busSearch"
-        android:name="com.bigneardranch.android.whereisbus.BusSearch"
+        android:name="com.bigneardranch.android.whereisbus.BusSearchFragment"
         android:label="BusSearch" >
         <action
             android:id="@+id/action_busSearch_to_busSearchResult"
@@ -25,6 +25,6 @@
     </fragment>
     <fragment
         android:id="@+id/busLocationFragment"
-        android:name="com.bigneardranch.android.whereisbus.BusLocationFragment"
+        android:name="com.bigneardranch.android.whereisbus.BusDetailFragment"
         android:label="BusLocationFragment" />
 </navigation>

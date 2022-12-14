@@ -1,51 +1,46 @@
 package com.bigneardranch.android.whereisbus
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bigneardranch.android.whereisbus.data.Bus
-import com.opencsv.CSVReader
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.io.InputStreamReader
 
+private const val TAG = "BusListViewModel"
 
-class BusListViewModel(private var routId: String) : ViewModel() {
+class BusListViewModel() : ViewModel() {
 
-    val buses = mutableListOf<Bus>()
+    private val busRepository = BusRepository.get()
 
+    private val _buses: MutableStateFlow<List<Bus>> = MutableStateFlow(emptyList())
+    val buses: StateFlow<List<Bus>>
+        get() = _buses.asStateFlow()
 
     init{
+        Log.d(TAG, "BusLineViewModel Init.....")
         viewModelScope.launch {
-            delay(5000)
-            for (i in 0 until 500 ){
-                val bus = Bus(
-                    routeId = routId,
-                    sectOrd = "",
-                    stopFlag = "",
-                    sectionId = "",
-                    vehId = "",
-                    plainNo = ""
-                )
-                buses += bus
+            busRepository.getBuses().collect(){
+                _buses.value = it
             }
-            buses += loadBuses()
         }
     }
 
-    suspend fun loadBuses() : List<Bus>{
-        val result = mutableListOf<Bus>()
-        delay(5000)
-        for (i in 0 until 500 ){
-            val bus = Bus(
-                routeId = "",
-                sectOrd = "",
-                stopFlag = "",
-                sectionId = "",
-                vehId = "",
-                plainNo = ""
-            )
-            result += bus
+    fun init() {
+        Log.d(TAG, "BusLineViewModel Init.....")
+        viewModelScope.launch {
+            busRepository.getBuses().collect(){
+                _buses.value = it
+            }
         }
-        return result
+
     }
+
+//    suspend fun addBus(bus: Bus){
+//        busRepository.addBus(bus)
+//    }
 }

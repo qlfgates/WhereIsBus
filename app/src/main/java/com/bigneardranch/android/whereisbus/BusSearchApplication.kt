@@ -1,7 +1,6 @@
 package com.bigneardranch.android.whereisbus
 
 import android.app.Application
-import com.opencsv.CSVReader
 import java.io.InputStreamReader
 
 class BusSearchApplication : Application() {

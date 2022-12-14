@@ -34,6 +34,7 @@ class BusSearchResultFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        Log.d(TAG, "dddd")
     }
 
     override fun onCreateView(
@@ -53,10 +54,10 @@ class BusSearchResultFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        job = viewLifecycleOwner.lifecycleScope.launch {
-            val buses = busSearchResultViewModel.loadBuses()
-            binding.busSearchResultListRecyclerView.adapter = BusSearchResultListAdapter(buses)
-        }
+//        job = viewLifecycleOwner.lifecycleScope.launch {
+//            val buses = busSearchResultViewModel.loadBuses()
+//            binding.busSearchResultListRecyclerView.adapter = BusSearchResultListAdapter(buses)
+//        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

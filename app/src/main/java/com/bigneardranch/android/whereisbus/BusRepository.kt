@@ -1,13 +1,20 @@
 package com.bigneardranch.android.whereisbus
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Room
 import com.bigneardranch.android.whereisbus.data.Bus
 import com.bigneardranch.android.whereisbus.database.BusDatabase
+import com.opencsv.CSVReader
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.Flow
+import java.io.InputStreamReader
 
-private const val DATABASE_NAME = "bus-database-routeid"
+// bus-database-routeid.sqlite
+// column : busRouteName + busRouteId
+
+private const val DATABASE_NAME = "bus-database-routeid.sqlite"
 
 class BusRepository private constructor(context: Context, private val coroutineScope: CoroutineScope = GlobalScope) {
 
@@ -17,8 +24,15 @@ class BusRepository private constructor(context: Context, private val coroutineS
         DATABASE_NAME
     ).createFromAsset(DATABASE_NAME).build()
 
-    suspend fun getBuses(): List<Bus> = database.busDao().getBuses()
-    suspend fun getBusesRouteId(routeId: String): List<Bus> = database.busDao().getBusesRouteId(routeId)
+    fun getBuses(): Flow<List<Bus>> {
+        Log.d(":::::", "BusRepository>getBueses")
+        return database.busDao().getBuses()
+    }
+    suspend fun getBusesRouteId(routeId: String): Bus = database.busDao().getBusesRouteId(routeId)
+
+//    suspend fun addBus(bus: Bus){
+//        database.busDao().addBus(bus)
+//    }
 
     companion object{
         private var INSTANCE: BusRepository? = null
