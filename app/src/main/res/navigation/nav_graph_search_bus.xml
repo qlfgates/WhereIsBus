@@ -1,30 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_search_bus"
-    app:startDestination="@id/busSearch">
-
+    app:startDestination="@id/busSearchFragment">
     <fragment
-        android:id="@+id/busSearch"
+        android:id="@+id/busSearchFragment"
         android:name="com.bigneardranch.android.whereisbus.BusSearchFragment"
-        android:label="BusSearch" >
+        android:label="BusSearchFragment"
+        tools:layout="@layout/fragment_bus_search">
         <action
-            android:id="@+id/action_busSearch_to_busSearchResult"
-            app:destination="@id/busSearchResult" />
+            android:id="@+id/action_busSearchFragment_to_busSearchResultFragment"
+            app:destination="@id/busSearchResultFragment">
+            <argument
+                android:name="busRouteId"
+                app:argType="string"
+                android:defaultValue=""/>
+        </action>
         <action
-            android:id="@+id/action_busSearch_to_busLocationFragment"
-            app:destination="@id/busLocationFragment" />
+            android:id="@+id/action_busSearchFragment_to_busDetailFragment"
+            app:destination="@id/busDetailFragment">
+            <argument
+                android:name="busRouteId"
+                app:argType="string"
+                android:defaultValue=""/>
+        </action>
     </fragment>
     <fragment
-        android:id="@+id/busSearchResult"
+        android:id="@+id/busSearchResultFragment"
         android:name="com.bigneardranch.android.whereisbus.BusSearchResultFragment"
-        android:label="BusSearchResult" >
+        android:label="BusSearchResultFragment"
+        tools:layout="@layout/fragment_bus_search_result">
         <action
-            android:id="@+id/action_busSearchResult_to_busLocationFragment"
-            app:destination="@id/busLocationFragment" />
+            android:id="@+id/action_busSearchResultFragment_to_busDetailFragment"
+            app:destination="@id/busDetailFragment">
+            <argument
+                android:name="busId"
+                app:argType="string"
+                android:defaultValue=""/>
+        </action>
     </fragment>
     <fragment
-        android:id="@+id/busLocationFragment"
+        android:id="@+id/busDetailFragment"
         android:name="com.bigneardranch.android.whereisbus.BusDetailFragment"
-        android:label="BusLocationFragment" />
+        android:label="BusDetailFragment"
+        tools:layout="@layout/fragment_bus_detail"/>
 </navigation>

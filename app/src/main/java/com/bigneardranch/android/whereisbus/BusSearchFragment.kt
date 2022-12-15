@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -30,12 +31,9 @@ class BusSearchFragment : Fragment() {
     private val binding
         get() = checkNotNull(_binding){ "Cannot access binding because it is null" }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,10 +54,9 @@ class BusSearchFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch{
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
                 busListViewModel.routes.collect{ routes ->
-                    binding.recentRecyclerView.adapter =
-                        BusListAdapter(routes) { routeId ->
+                    binding.recentRecyclerView.adapter = BusListAdapter(routes) { routeId ->
                             findNavController().navigate(
-                                BusSearchFragmentDirections.actionBusSearchToBusSearchResult()
+                                BusSearchFragmentDirections.actionBusSearchFragmentToBusSearchResultFragment()
                             )
                         }
                 }

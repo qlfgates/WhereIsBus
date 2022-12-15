@@ -1,5 +1,6 @@
 package com.bigneardranch.android.whereisbus
 
+import android.util.Log
 import com.bigneardranch.android.whereisbus.api.BusApi
 import com.bigneardranch.android.whereisbus.api.BusLocationInterceptor
 import com.bigneardranch.android.whereisbus.data.Bus
@@ -8,14 +9,19 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create
 
+private const val TAG = "BusSearchResultRepository"
+
 class BusSearchResultRepository {
 
     private val busApi: BusApi
+    private var busNumber: String = ""
+        set(value){ busNumber = value}
 
     init {
+        Log.d(TAG, "retrofit init")
 
         val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(BusLocationInterceptor())
+            .addInterceptor(BusLocationInterceptor(busNumber))
             .build()
 
         val retrofit: Retrofit = Retrofit.Builder()

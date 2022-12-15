@@ -34,8 +34,7 @@ class BusSearchResultFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-        Log.d(TAG, "dddd")
+        Log.d(TAG, "onCreate")
     }
 
     override fun onCreateView(
@@ -45,6 +44,7 @@ class BusSearchResultFragment : Fragment() {
     ): View? {
         _binding = FragmentBusSearchResultBinding.inflate(inflater, container, false)
         binding.busSearchResultListRecyclerView.layoutManager = LinearLayoutManager(context)
+        Log.d(TAG, "onCreateView")
 
         return binding.root
     }
@@ -53,11 +53,14 @@ class BusSearchResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
                 busSearchResultViewModel.busItems.collect{ busItems ->
-                    binding.busSearchResultListRecyclerView.adapter = BusSearchResultListAdapter(busItems)
-
+                    binding.busSearchResultListRecyclerView.adapter = BusSearchResultListAdapter(busItems){
+                        busItems -> findNavController().navigate(
+                        BusSearchResultFragmentDirections.actionBusSearchResultFragmentToBusDetailFragment())
+                    }
                 }
             }
         }

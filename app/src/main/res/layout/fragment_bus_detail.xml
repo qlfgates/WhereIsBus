@@ -91,7 +91,7 @@
         android:paddingHorizontal="20dp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/location_recyclerView"
             android:layout_width="411dp"
             android:layout_height="wrap_content"
             android:padding="8dp"
